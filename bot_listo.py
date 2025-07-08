@@ -9,42 +9,24 @@ api_id = 24448076
 api_hash = '873d006b19ba8172d87585d58f40e23d'
 session_name = 'premium_sender'
 
-# Mensaje origen
-grupo_origen_id = 2716599370  # Add Test
+# Grupo origen y destino (Add Test)
+grupo_origen_id = -1002716599370
 mensaje_id = 32
+grupo_destino_id = -1002716599370
 
-grupos_destino_ids = [
-    -1002267868043,  # VENTAS_ELITE
-    -1002374313514,  # MENDIVILIZA CHAT
-    -1002284147408,  # DELUXE CHK
-    -1002188331454,  # LUNA SHoP [ CHAT ]
-    -1002400740384,  # Appfel Chat
-    -1002686224272,  # VaultCrew Chat
-    -1002462045873,  # DARK CHK *CHAT*
-    -1002641373819,  # CNDY CHK [CHAT]
-    -1002482743388,  # Yoshi Chk [Ventas]
-    -1002626207534,  # Cloudflare Shop
-    -1002438580408,  # UMBRLLA_CHK
-    -1002334234976,  # Tomato Chk ( revivido )
-    -1002335238228,  # Sudo team 🧠
-    -1002165842343,  # LEVIATAN CHK
-    -1002312406490   # MENDOZA CHAT
-]
+TIEMPO_ESPERA = 300  # ⏱️ 5 minutos = 300 segundos
 
-
-TIEMPO_ESPERA = 14400  # ⏱️ 4 horas = 14,400 segundos
-
-# === FLASK PARA RENDER ===
+# === FLASK PARA mantener vivo en Render ===
 app = Flask('')
 
 @app.route('/')
 def home():
-    return '✅ Bot activo'
+    return '✅ Bot activo (envía cada 5 minutos)'
 
 def run_flask():
     app.run(host='0.0.0.0', port=8080)
 
-# Iniciar Flask en segundo plano
+# Inicia Flask en segundo plano
 threading.Thread(target=run_flask).start()
 
 # === FUNCIÓN DE ENVÍO ===
@@ -56,30 +38,29 @@ async def enviar_mensaje():
             print("❌ No se encontró el mensaje con ese ID.")
             return
 
-        for gid in grupos_destino_ids:
-            try:
-                await client.send_message(gid, message=mensaje)
-                print(f"✅ Mensaje enviado a {gid}")
-            except Exception as e:
-                print(f"❌ Error enviando a {gid}: {e}")
+        try:
+            await client.send_message(grupo_destino_id, message=mensaje)
+            print(f"✅ Mensaje enviado a Add Test correctamente.")
+        except Exception as e:
+            print(f"❌ Error al enviar a Add Test: {e}")
 
 # === BUCLE PRINCIPAL ===
 async def main():
     while True:
-        print("\n🚀 Enviando mensaje...\n")
+        print("\n🚀 Enviando mensaje a Add Test...\n")
         await enviar_mensaje()
 
-        print(f"\n⏳ Próximo envío en 4 horas...\n")
+        print(f"\n⏳ Próximo envío en 5 minutos...\n")
         for i in range(TIEMPO_ESPERA, 0, -1):
-            horas = i // 3600
-            minutos = (i % 3600) // 60
+            minutos = i // 60
             segundos = i % 60
-            tiempo_formateado = f"{horas:02d}:{minutos:02d}:{segundos:02d}"
+            tiempo_formateado = f"{minutos:02d}:{segundos:02d}"
             print(f"⌛ Tiempo restante: {tiempo_formateado}", end="\r")
             await asyncio.sleep(1)
 
 # Ejecutar el bucle
 asyncio.run(main())
+
 
 
 
