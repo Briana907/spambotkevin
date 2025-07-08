@@ -13,24 +13,24 @@ session_name = 'premium_sender'
 grupo_origen_id = 2716599370  # Add Test
 mensaje_id = 32
 
-# Lista de grupos destino (excepto Add Test)
 grupos_destino_ids = [
-    2267868043,  # VENTAS_ELITE
-    2374313514,  # MENDIVILIZA CHAT
-    2284147408,  # DELUXE CHK
-    2188331454,  # LUNA SHoP [ CHAT ]
-    2400740384,  # Appfel Chat
-    2686224272,  # VaultCrew Chat
-    2462045873,  # DARK CHK *CHAT*
-    2640258378,  # CNDY CHK [CHAT]
-    2482743388,  # Yoshi Chk [Ventas]
-    2626207534,  # Cloudflare Shop
-    2438580408,  # UMBRLLA_CHK
-    2334234976,  # Tomato Chk ( revivido )
-    2335238228,  # Sudo team 🧠
-    2165842343,  # LEVIATAN CHK
-    2312406490   # MENDOZA CHAT
+    -1002267868043,  # VENTAS_ELITE
+    -1002374313514,  # MENDIVILIZA CHAT
+    -1002284147408,  # DELUXE CHK
+    -1002188331454,  # LUNA SHoP [ CHAT ]
+    -1002400740384,  # Appfel Chat
+    -1002686224272,  # VaultCrew Chat
+    -1002462045873,  # DARK CHK *CHAT*
+    -1002641373819,  # CNDY CHK [CHAT]
+    -1002482743388,  # Yoshi Chk [Ventas]
+    -1002626207534,  # Cloudflare Shop
+    -1002438580408,  # UMBRLLA_CHK
+    -1002334234976,  # Tomato Chk ( revivido )
+    -1002335238228,  # Sudo team 🧠
+    -1002165842343,  # LEVIATAN CHK
+    -1002312406490   # MENDOZA CHAT
 ]
+
 
 TIEMPO_ESPERA = 14400  # ⏱️ 4 horas = 14,400 segundos
 
