@@ -32,8 +32,8 @@ grupos_destino_ids = [
     -1002312406490   # MENDOZA CHAT
 ]
 
-# Espera de 5 horas (en segundos)
-TIEMPO_ESPERA = 18000
+# Espera de 4 horas (en segundos)
+TIEMPO_ESPERA = 14400
 
 # === FLASK PARA MANTENER VIVO EN RENDER ===
 app = Flask('')
@@ -64,10 +64,10 @@ async def enviar_mensaje():
             except Exception as e:
                 print(f"❌ Error enviando a {gid}: {e}")
 
-# === BUCLE PRINCIPAL: ESPERA 5 HORAS ANTES DEL PRIMER ENVÍO ===
+# === BUCLE PRINCIPAL: ESPERA 4 HORAS ANTES DEL PRIMER ENVÍO ===
 async def main():
     while True:
-        print(f"\n⏳ Próximo envío en 5 horas...\n")
+        print(f"\n⏳ Próximo envío en 4 horas...\n")
         for i in range(TIEMPO_ESPERA, 0, -1):
             horas = i // 3600
             minutos = (i % 3600) // 60
@@ -81,6 +81,7 @@ async def main():
 
 # === EJECUTAR BOT ===
 asyncio.run(main())
+
 
 
 
