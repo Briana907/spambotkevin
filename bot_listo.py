@@ -66,6 +66,9 @@ async def enviar_mensaje():
 # === BUCLE PRINCIPAL ===
 async def main():
     while True:
+        print("\n🚀 Enviando mensaje...\n")
+        await enviar_mensaje()
+
         print(f"\n⏳ Próximo envío en 4 horas...\n")
         for i in range(TIEMPO_ESPERA, 0, -1):
             horas = i // 3600
@@ -75,11 +78,9 @@ async def main():
             print(f"⌛ Tiempo restante: {tiempo_formateado}", end="\r")
             await asyncio.sleep(1)
 
-        print("\n🚀 Enviando mensaje...\n")
-        await enviar_mensaje()
-
 # Ejecutar el bucle
 asyncio.run(main())
+
 
 
 
