@@ -1,4 +1,3 @@
-
 from telethon.sync import TelegramClient  
 from telethon.tl.types import Message
 import asyncio
@@ -10,12 +9,30 @@ api_id = 24448076
 api_hash = '873d006b19ba8172d87585d58f40e23d'
 session_name = 'premium_sender'
 
-# IDs del grupo y mensaje
-grupo_origen_id = 2716599370
+# Mensaje origen
+grupo_origen_id = 2716599370  # Add Test
 mensaje_id = 32
-grupo_destino_id = 2716599370
 
-TIEMPO_ESPERA = 120  # ⏱️ 2 minutos = 120 segundos
+# Lista de grupos destino (excepto Add Test)
+grupos_destino_ids = [
+    2267868043,  # VENTAS_ELITE
+    2374313514,  # MENDIVILIZA CHAT
+    2284147408,  # DELUXE CHK
+    2188331454,  # LUNA SHoP [ CHAT ]
+    2400740384,  # Appfel Chat
+    2686224272,  # VaultCrew Chat
+    2462045873,  # DARK CHK *CHAT*
+    2640258378,  # CNDY CHK [CHAT]
+    2482743388,  # Yoshi Chk [Ventas]
+    2626207534,  # Cloudflare Shop
+    2438580408,  # UMBRLLA_CHK
+    2334234976,  # Tomato Chk ( revivido )
+    2335238228,  # Sudo team 🧠
+    2165842343,  # LEVIATAN CHK
+    2312406490   # MENDOZA CHAT
+]
+
+TIEMPO_ESPERA = 14400  # ⏱️ 4 horas = 14,400 segundos
 
 # === FLASK PARA RENDER ===
 app = Flask('')
@@ -39,17 +56,22 @@ async def enviar_mensaje():
             print("❌ No se encontró el mensaje con ese ID.")
             return
 
-        await client.send_message(grupo_destino_id, message=mensaje)
-        print("✅ Mensaje enviado exitosamente.")
+        for gid in grupos_destino_ids:
+            try:
+                await client.send_message(gid, message=mensaje)
+                print(f"✅ Mensaje enviado a {gid}")
+            except Exception as e:
+                print(f"❌ Error enviando a {gid}: {e}")
 
 # === BUCLE PRINCIPAL ===
 async def main():
     while True:
-        print(f"\n⏳ Próximo envío en 2 minutos...\n")
+        print(f"\n⏳ Próximo envío en 4 horas...\n")
         for i in range(TIEMPO_ESPERA, 0, -1):
-            minutos = i // 60
+            horas = i // 3600
+            minutos = (i % 3600) // 60
             segundos = i % 60
-            tiempo_formateado = f"{minutos:02d}:{segundos:02d}"
+            tiempo_formateado = f"{horas:02d}:{minutos:02d}:{segundos:02d}"
             print(f"⌛ Tiempo restante: {tiempo_formateado}", end="\r")
             await asyncio.sleep(1)
 
@@ -58,6 +80,7 @@ async def main():
 
 # Ejecutar el bucle
 asyncio.run(main())
+
 
 
 
